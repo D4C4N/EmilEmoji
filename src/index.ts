@@ -21,7 +21,7 @@ client.on("emojiCreate", (emoji: GuildEmoji) => {
   const guild = emoji.guild;
 
   const announceChannel = guild.channels.cache.find(
-    (channel): channel is TextChannel => channel.isTextBased() && channel.name === "log"
+    (channel): channel is TextChannel => channel.isTextBased() && channel.name === "general"
   );
 
   if (announceChannel) {
