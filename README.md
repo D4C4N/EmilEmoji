@@ -61,7 +61,7 @@ Contributions are welcome! If you want to add features, improve the code, or fix
 
 ## License
 
-This project is currently not licensed under a specific license. However, it is open-source and free to use, modify, and distribute. If you have any questions or concerns, please feel free to reach out to me.
+This project is licensed under the [Duck Duck Go](https://opensource.org/license/mit).
 
 ---
 
