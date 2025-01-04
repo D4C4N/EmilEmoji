@@ -53,9 +53,7 @@ npm start
 
 When a new emoji is added, Emil Emoji will post:
 
-🎉 A new emote has been added to the server! 🎉
-
-<new emoji>
+![image](https://github.com/user-attachments/assets/04fd2b1a-8c20-462b-a632-7ad2855a8afd)
 
 ## Contributing
 
