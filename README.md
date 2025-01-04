@@ -1,10 +1,10 @@
 # Emil Emoji
 
-Emil Emoji is a Discord bot designed to notify your server whenever a new emoji is added. It monitors emoji creation events and announces them in the server's #general channel (or logs an error if the channel is not found).
+Emil Emoji is a Discord bot designed to notify your server whenever a new emoji is added. It monitors emoji creation events and announces them in a user-specified channel, configurable via an environment variable (or logs an error if the channel is not found).
 
 ## Features
 
-- **Emoji Notifications:** Sends a message in the #general channel whenever a new emoji is created.
+- **Emoji Notifications:** Sends a message in the user-specified channel whenever a new emoji is created.
 
 - **Customizable Behavior:** Easily extend functionality for other emoji-related events or customize the announcement channel.
 
@@ -12,7 +12,7 @@ Emil Emoji is a Discord bot designed to notify your server whenever a new emoji 
 
 - **Node.js:** Ensure you have Node.js installed (v16.9.0 or higher).
 
-- **Discord Bot Token:** You need a bot token from the Discord Developer Portal.
+- **Discord Bot Token:** You need a bot token from the [Discord Developer Portal](https://discord.com/developers/docs/intro).
 
 ## Setup
 
@@ -29,10 +29,11 @@ cd emil-emoji
 npm install
 ```
 
-### 3. Create a .env file in the project root and add your bot token
+### 3. Create a `.env` file in the project root and add your bot token and announcement channel
 
 ```env
 BOT_TOKEN=your-bot-token-here
+ANNOUNCE_CHANNEL=your-channel-name
 ```
 
 ### 4. Start the bot
@@ -45,7 +46,7 @@ npm start
 
 - Listens for emojiCreate events in Discord servers where the bot is added.
 
-- Finds the #general channel (or logs an error if the channel is missing).
+- Finds the specified channel (via the `ANNOUNCE_CHANNEL` environment variable) or defaults to `#general` if not specified.
 
 - Sends a celebratory message along with the newly added emoji.
 
