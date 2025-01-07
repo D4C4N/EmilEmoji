@@ -7,16 +7,16 @@ import { Guild, TextChannel } from "discord.js";
  * @returns 
  */
 export const getAnnouncementChannel = (guild: Guild) => {
-    const announceChannelName = process.env.ANNOUNCE_CHANNEL || "general";
+  const announceChannelName = process.env.ANNOUNCE_CHANNEL || "general";
 
-    const channel = guild.channels.cache.find(
-        (channel): channel is TextChannel => channel.isTextBased() && channel.name === announceChannelName
-    );
+  const channel = guild.channels.cache.find(
+    (channel): channel is TextChannel => channel.isTextBased() && channel.name === announceChannelName
+  );
 
-    if (!channel) {
-        console.log(`Channel '${announceChannelName}' not found in guild: ${guild.name}`);
-        return null;
-    }
+  if (!channel) {
+    console.log(`Channel '${announceChannelName}' not found in guild: ${guild.name}`);
+    return null;
+  }
 
-    return channel;
+  return channel;
 };

@@ -6,12 +6,12 @@ import { getAnnouncementChannel } from "../util/channelUtil";
  * @param emoji - The emoji that was created.
  */
 export const onCreateEmoji = (emoji: GuildEmoji) => {
-    const announceChannel = getAnnouncementChannel(emoji.guild);
+  const announceChannel = getAnnouncementChannel(emoji.guild);
 
-    if (announceChannel) {
-        announceChannel.send(`🎉 A new emote has been added to the server! 🎉`);
-        announceChannel.send(`${emoji}`);
-    }
+  if (announceChannel) {
+    announceChannel.send(`🎉 A new emote has been added to the server! 🎉`);
+    announceChannel.send(`${emoji}`);
+  }
 };
 
 /**
@@ -19,9 +19,9 @@ export const onCreateEmoji = (emoji: GuildEmoji) => {
  * @param emoji - The emoji that was deleted.
  */
 export const onDeleteEmoji = (emoji: GuildEmoji) => {
-    const announceChannel = getAnnouncementChannel(emoji.guild);
+  const announceChannel = getAnnouncementChannel(emoji.guild);
 
-    // Handle deletion of emoji
+  // Handle deletion of emoji
 };
 
 /**
@@ -30,7 +30,7 @@ export const onDeleteEmoji = (emoji: GuildEmoji) => {
  * @param newEmoji - the updated emoji
  */
 export const onUpdateEmoji = (oldEmoji: GuildEmoji, newEmoji: GuildEmoji) => {
-    const announceChannel = getAnnouncementChannel(newEmoji.guild);
+  const announceChannel = getAnnouncementChannel(newEmoji.guild);
 
-    // Handle update of emoji
+  // Handle update of emoji
 };
