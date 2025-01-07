@@ -27,6 +27,7 @@ cd emil-emoji
 
 ```bash
 npm install
+npm install typescript ts-node @types/node @types/discord.js dotenv
 ```
 
 ### 3. Create a `.env` file in the project root and add your bot token and announcement channel
@@ -36,10 +37,19 @@ BOT_TOKEN=your-bot-token-here
 ANNOUNCE_CHANNEL=your-channel-name
 ```
 
-### 4. Start the bot
+### 4. Run in development mode
 
 ```bash
 npm start
+```
+
+### 5. (Optional) Build for production
+
+If you want to compile the TypeScript code and run it in production:
+
+```bash
+npm run build
+node dist/index.js
 ```
 
 ## How It Works
