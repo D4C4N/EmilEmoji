@@ -19,7 +19,7 @@ Emil Emoji is a Discord bot designed to notify your server whenever a new emoji 
 ### 1. Clone the repository
   
 ```bash
-git clone https://github.com/your-username/emil-emoji.git
+git clone https://github.com/d4c4n/emil-emoji.git
 cd emil-emoji
 ```
 
