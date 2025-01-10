@@ -14,10 +14,10 @@ RUN npm install -g typescript
 # Copy the rest of the application files
 COPY . .
 
-# Build the TypeScript code (replace with your actual build command)
+# Build the TypeScript code
 RUN npm run build
 
-# Expose the port your bot listens on (if applicable)
+# Expose port the bot listens on
 EXPOSE 3000
 
 # Start the bot
