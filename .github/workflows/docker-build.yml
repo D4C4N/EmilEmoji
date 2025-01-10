@@ -31,9 +31,14 @@ jobs:
         platforms: linux/arm/v7,linux/arm64
 
     - name: Deploy to Raspberry Pi
-      run: ssh -o StrictHostKeyChecking=no ${{ secrets.RPI_USER }}@${{ secrets.RPI_HOST }} "
-        docker pull d4c4n/emil-emoji:latest &&
-        docker stop discord-bot || true &&
-        docker rm discord-bot || true &&
-        docker run -d --name discord-bot -p 3000:3000 d4c4n/emil-emoji:latest
-      "
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.RPI_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh -o StrictHostKeyChecking=no ${{ secrets.RPI_USER }}@${{ secrets.RPI_HOST }} "
+          docker pull d4c4n/emil-emoji:latest &&
+          docker stop discord-bot || true &&
+          docker rm discord-bot || true &&
+          docker run -d --name discord-bot -p 3000:3000 d4c4n/emil-emoji:latest
+        "
+      
