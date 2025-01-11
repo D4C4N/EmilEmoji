@@ -36,7 +36,7 @@ jobs:
         echo "${{ secrets.RPI_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh -o StrictHostKeyChecking=no ${{ secrets.RPI_USER }}@${{ secrets.RPI_HOST }} "
-          cd /path/to/your/project &&
+          cd /home/root/EmilEmoji &&
           git pull origin main &&
           docker build -t d4c4n/emil-emoji:latest . &&
           docker stop emil-emoji || true &&
