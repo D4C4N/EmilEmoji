@@ -1,5 +1,6 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { ActivityType, Client, Events, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
+import { onAuditLogEntryCreate } from './handlers/auditLogs';
 import { onCreateEmoji, onDeleteEmoji, onUpdateEmoji } from './handlers/emojis';
 
 // Load environment variables from .env file
@@ -13,8 +14,21 @@ if (!BOT_TOKEN) {
 
 // Initialize a new Discord client with necessary intents
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildExpressions],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildExpressions,
+    GatewayIntentBits.GuildModeration,
+  ],
 });
+
+client.options.presence = {
+  activities: [
+    {
+      name: "out for new emotes 👀",
+      type: ActivityType.Watching,
+    },
+  ],
+};
 
 // Event triggered when the bot successfully logs in
 client.once(Events.ClientReady, () => {
@@ -25,6 +39,9 @@ client.once(Events.ClientReady, () => {
 client.on(Events.GuildEmojiCreate, onCreateEmoji);
 client.on(Events.GuildEmojiDelete, onDeleteEmoji);
 client.on(Events.GuildEmojiUpdate, onUpdateEmoji);
+
+// Register AuditLog event handlers
+client.on(Events.GuildAuditLogEntryCreate, (auditLog) => onAuditLogEntryCreate({ client, auditLog }));
 
 // Log the bot in using the provided token
 client.login(BOT_TOKEN).catch((err: unknown) => {
