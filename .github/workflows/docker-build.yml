@@ -30,7 +30,7 @@ jobs:
         tags: d4c4n/emil-emoji:latest
         platforms: linux/arm/v7,linux/arm64
 
-    - name: Deploy to Raspberry Pi
+    - name: Deploy to Ubuntu Server
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.RPI_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
