@@ -2,6 +2,7 @@ import { ActivityType, Client, Events, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
 import { onAuditLogEntryCreate } from './handlers/auditLogs';
 import { onCreateEmoji, onDeleteEmoji, onUpdateEmoji } from './handlers/emojis';
+import { onCreateSticker, onDeleteSticker, onUpdateSticker } from './handlers/stickers';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -39,6 +40,43 @@ client.once(Events.ClientReady, () => {
 client.on(Events.GuildEmojiCreate, onCreateEmoji);
 client.on(Events.GuildEmojiDelete, onDeleteEmoji);
 client.on(Events.GuildEmojiUpdate, onUpdateEmoji);
+
+// Register sticker event handlers
+client.on(Events.GuildStickerCreate, (sticker) => {
+  if (!sticker.guildId) {
+    console.warn("Sticker does not have a valid guildId.");
+    return;
+  }
+
+  const guild = client.guilds.cache.get(sticker.guildId);
+  if (guild) {
+    onCreateSticker(guild, sticker);
+  }
+});
+
+client.on(Events.GuildStickerDelete, (sticker) => {
+  if (!sticker.guildId) {
+    console.warn("Sticker does not have a valid guildId.");
+    return;
+  }
+
+  const guild = client.guilds.cache.get(sticker.guildId);
+  if (guild) {
+    onDeleteSticker(guild, sticker);
+  }
+});
+
+client.on(Events.GuildStickerUpdate, (oldSticker, newSticker) => {
+  if (!newSticker.guildId) {
+    console.warn("Sticker does not have a valid guildId.");
+    return;
+  }
+
+  const guild = client.guilds.cache.get(newSticker.guildId);
+  if (guild) {
+    onUpdateSticker(guild, oldSticker, newSticker);
+  }
+});
 
 // Register AuditLog event handlers
 client.on(Events.GuildAuditLogEntryCreate, (auditLog) => onAuditLogEntryCreate({ client, auditLog }));
