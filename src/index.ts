@@ -2,6 +2,7 @@ import { ActivityType, Client, Events, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
 import { onAuditLogEntryCreate } from './handlers/auditLogs';
 import { onCreateEmoji, onDeleteEmoji, onUpdateEmoji } from './handlers/emojis';
+import { onCreateSticker, onDeleteSticker, onUpdateSticker } from './handlers/stickers';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -39,6 +40,11 @@ client.once(Events.ClientReady, () => {
 client.on(Events.GuildEmojiCreate, onCreateEmoji);
 client.on(Events.GuildEmojiDelete, onDeleteEmoji);
 client.on(Events.GuildEmojiUpdate, onUpdateEmoji);
+
+// Register sticker event handlers
+client.on(Events.GuildStickerCreate, onCreateSticker);
+client.on(Events.GuildStickerDelete, onDeleteSticker);
+client.on(Events.GuildStickerUpdate, onUpdateSticker);
 
 // Register AuditLog event handlers
 client.on(Events.GuildAuditLogEntryCreate, (auditLog) => onAuditLogEntryCreate({ client, auditLog }));

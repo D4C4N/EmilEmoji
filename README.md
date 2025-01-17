@@ -1,10 +1,10 @@
 # Emil Emoji
 
-**Emil Emoji** is a Discord bot designed to notify your server about newly added emojis and soundboard sounds. It monitors emoji creation and soundboard sound events, announcing them in a user-specified channel, configurable via an environment variable (or logs an error if the channel is not found).
+**Emil Emoji** is a Discord bot designed to notify your server about newly added emojis, stickers and soundboard sounds. It monitors emoji/sticker creation and soundboard sound events, announcing them in a user-specified channel, configurable via an environment variable (or logs an error if the channel is not found).
 
 ## Features
 
-- **Emoji Notifications:** Sends a message in the user-specified channel whenever a new emoji is created.
+- **Emoji/Sticker Notifications:** Sends a message in the user-specified channel whenever a new emoji/sticker is created.
 - **Soundboard Notifications:** Announces the addition of new soundboard sounds.
 - **Customizable Behavior:** Easily extend functionality for other emoji-related events or customize the announcement channel.
 
@@ -53,11 +53,11 @@ node dist/index.js
 
 ## How It Works
 
-- The bot listens for emoji creation and soundboard sound creation events in Discord servers where it is added.
+- The bot listens for emoji/sticker creation and soundboard sound creation events in Discord servers where it is added.
 
 - Finds the specified channel (via the `ANNOUNCE_CHANNEL` environment variable) or defaults to `#general` if not specified.
 
-- Sends a celebratory message along with the newly added emoji or soundboard sound.
+- Sends a celebratory message along with the newly added emoji/sticker or soundboard sound.
 
 ## Example Output
 
