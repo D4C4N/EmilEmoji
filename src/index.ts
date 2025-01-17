@@ -42,41 +42,9 @@ client.on(Events.GuildEmojiDelete, onDeleteEmoji);
 client.on(Events.GuildEmojiUpdate, onUpdateEmoji);
 
 // Register sticker event handlers
-client.on(Events.GuildStickerCreate, (sticker) => {
-  if (!sticker.guildId) {
-    console.warn("Sticker does not have a valid guildId.");
-    return;
-  }
-
-  const guild = client.guilds.cache.get(sticker.guildId);
-  if (guild) {
-    onCreateSticker(guild, sticker);
-  }
-});
-
-client.on(Events.GuildStickerDelete, (sticker) => {
-  if (!sticker.guildId) {
-    console.warn("Sticker does not have a valid guildId.");
-    return;
-  }
-
-  const guild = client.guilds.cache.get(sticker.guildId);
-  if (guild) {
-    onDeleteSticker(guild, sticker);
-  }
-});
-
-client.on(Events.GuildStickerUpdate, (oldSticker, newSticker) => {
-  if (!newSticker.guildId) {
-    console.warn("Sticker does not have a valid guildId.");
-    return;
-  }
-
-  const guild = client.guilds.cache.get(newSticker.guildId);
-  if (guild) {
-    onUpdateSticker(guild, oldSticker, newSticker);
-  }
-});
+client.on(Events.GuildStickerCreate, onCreateSticker);
+client.on(Events.GuildStickerDelete, onDeleteSticker);
+client.on(Events.GuildStickerUpdate, onUpdateSticker);
 
 // Register AuditLog event handlers
 client.on(Events.GuildAuditLogEntryCreate, (auditLog) => onAuditLogEntryCreate({ client, auditLog }));
