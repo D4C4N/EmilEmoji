@@ -7,6 +7,11 @@ import { sendAnnouncement } from "../util/announceUtil";
  * @param sticker - The sticker that was created.
  */
 export const onCreateSticker = (sticker: Sticker) => {
+  if (!sticker.guild) {
+    console.log("No guild found.");
+    return;
+  }
+
   const embed = new EmbedBuilder()
     .setTitle("🎉 A new sticker has been added! 🎉")
     .setDescription(`Say hello to **${sticker.name}**!`)
@@ -15,9 +20,8 @@ export const onCreateSticker = (sticker: Sticker) => {
     .setFooter({ text: "Sticker Update" })
     .setTimestamp();
 
-  sendAnnouncement(sticker.guild!, { embeds: [embed] });
+  sendAnnouncement(sticker.guild, { embeds: [embed] });
 };
-
 
 /**
  * Handles the event when a sticker is deleted from a server.

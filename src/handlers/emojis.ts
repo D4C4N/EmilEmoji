@@ -6,7 +6,7 @@ import { sendAnnouncement } from "../util/announceUtil";
  * @param emoji - The emoji that was created.
  */
 export const onCreateEmoji = (emoji: GuildEmoji) => {
-  const emojiUrl = `https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? "gif" : "png"}`;
+  const emojiUrl = `${process.env.CDN_BASE_URL}emojis/${emoji.id}.${emoji.animated ? "gif" : "png"}`;
 
   const embed = new EmbedBuilder()
     .setTitle("🎉 A new emoji has been added! 🎉")
