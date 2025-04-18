@@ -1,17 +1,22 @@
-import { GuildEmoji } from "discord.js";
-import { getAnnouncementChannel } from "../util/channelUtil";
+import { GuildEmoji, EmbedBuilder } from "discord.js";
+import { sendAnnouncement } from "../util/announceUtil";
 
 /**
  * Handles the event when a new emoji is created in a server.
  * @param emoji - The emoji that was created.
  */
 export const onCreateEmoji = (emoji: GuildEmoji) => {
-  const announceChannel = getAnnouncementChannel(emoji.guild);
+  const emojiUrl = `https://cdn.discordapp.com/emojis/${emoji.id}.${emoji.animated ? "gif" : "png"}`;
 
-  if (announceChannel) {
-    announceChannel.send(`🎉 A new emote has been added to the server! 🎉`);
-    announceChannel.send(`${emoji}`);
-  }
+  const embed = new EmbedBuilder()
+    .setTitle("🎉 A new emoji has been added! 🎉")
+    .setDescription(`Say hello to **${emoji.name}**!`)
+    .setImage(emojiUrl)
+    .setColor(0x00ffcc)
+    .setFooter({ text: "Emoji Update" })
+    .setTimestamp();
+
+  sendAnnouncement(emoji.guild, { embeds: [embed] });
 };
 
 /**
@@ -19,8 +24,6 @@ export const onCreateEmoji = (emoji: GuildEmoji) => {
  * @param emoji - The emoji that was deleted.
  */
 export const onDeleteEmoji = (emoji: GuildEmoji) => {
-  const announceChannel = getAnnouncementChannel(emoji.guild);
-
   // Handle deletion of emoji
 };
 
@@ -30,7 +33,5 @@ export const onDeleteEmoji = (emoji: GuildEmoji) => {
  * @param newEmoji - the updated emoji
  */
 export const onUpdateEmoji = (oldEmoji: GuildEmoji, newEmoji: GuildEmoji) => {
-  const announceChannel = getAnnouncementChannel(newEmoji.guild);
-
   // Handle update of emoji
 };

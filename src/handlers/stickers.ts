@@ -1,20 +1,23 @@
-import { Sticker } from "discord.js";
+import { Sticker, EmbedBuilder } from "discord.js";
 import { getAnnouncementChannel } from "../util/channelUtil";
+import { sendAnnouncement } from "../util/announceUtil";
 
 /**
  * Handles the event when a new sticker is created in a server.
  * @param sticker - The sticker that was created.
  */
 export const onCreateSticker = (sticker: Sticker) => {
-  const announceChannel = getAnnouncementChannel(sticker.guild);
+  const embed = new EmbedBuilder()
+    .setTitle("🎉 A new sticker has been added! 🎉")
+    .setDescription(`Say hello to **${sticker.name}**!`)
+    .setImage(sticker.url)
+    .setColor(0x0099ff)
+    .setFooter({ text: "Sticker Update" })
+    .setTimestamp();
 
-  if (announceChannel) {
-    announceChannel.send({
-      content: `🎉 A new sticker has been added to the server! 🎉`,
-      stickers: [sticker.id],
-    });
-  }
+  sendAnnouncement(sticker.guild!, { embeds: [embed] });
 };
+
 
 /**
  * Handles the event when a sticker is deleted from a server.
